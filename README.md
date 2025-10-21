@@ -1,49 +1,62 @@
-# Proyecto Desis
+SISTEMA DE REGISTRO DE PRODUCTOS
 
-Este repositorio contiene una pequeña aplicación PHP (archivos en la raíz y la carpeta `php/`), hojas de estilo en `css/` y scripts en `js/`.
+Sistema web para el registro de productos con validaciones, conexión a base 
+de datos PostgreSQL y tecnologías nativas (HTML, CSS, JavaScript y PHP).
 
-Objetivo: instrucciones rápidas para inicializar un repositorio Git local y subirlo a GitHub con buenas prácticas.
+INSTALACIÓN
+================================================================================
 
-Opciones para crear el repositorio remoto en GitHub:
+1. CONFIGURAR BASE DE DATOS
+   
+   Crear la base de datos en PostgreSQL:
+   
+   CREATE DATABASE registro_productos;
+   
+   Importar el esquema y datos:
+   
+   psql -U postgres -d registro_productos -f sql/crear_base_datos.sql
 
-- Opción A — Interfaz web de GitHub (fácil):
-  1. Ve a https://github.com, inicia sesión y clic en "New repository".
-  2. Elige nombre, visibilidad (público/privado) y NO marques "Initialize this repository with a README" (ya tienes uno local).
-  3. Crea el repo y copia la URL remota (HTTPS o SSH).
+2. CONFIGURAR CONEXIÓN
+   
+   Editar php/config.php con sus credenciales de PostgreSQL:
+   
+   define('DB_HOST', 'localhost');
+   define('DB_PORT', '5432');
+   define('DB_NAME', 'registro_productos');
+   define('DB_USER', 'postgres');
+   define('DB_PASSWORD', 'su_contraseña');
 
-- Opción B — gh CLI (rápido y reproducible):
-  1. Instala la herramienta `gh` y autentícala: `gh auth login`.
-  2. Desde la carpeta del proyecto ejecuta: `gh repo create <owner>/<repo> --private --source=. --remote=origin` (ajusta visibilidad).
+3. HABILITAR EXTENSIÓN PHP-PGSQL
+   
+   En php.ini, descomentar:
+   
+   extension=pgsql
+   extension=pdo_pgsql
+   
+   Configurar extension_dir con la ruta correcta.
 
-- Opción C — Desde VS Code (UI integrada):
-  1. Abre la carpeta en VS Code, ve a la extensión Git y haz "Publish to GitHub".
+4. INICIAR SERVIDOR
+   
+   php -S localhost:8000
+   
+   Acceder a: http://localhost:8000/index.php
 
-Pasos locales (PowerShell en Windows):
+FUNCIONALIDADES
+================================================================================
 
-1. Inicializar git y hacer commit inicial
+- Registro de productos con 8 campos validados
+- Validaciones JavaScript con mensajes personalizados
+- Carga dinámica de selects mediante AJAX
+- Verificación de código único en tiempo real
+- Sucursales dependientes de bodega seleccionada
+- Guardado en base de datos con transacciones
 
-```powershell
-git init
-git checkout -b main
-git add .
-git commit -m "Initial commit"
-```
+VALIDACIONES
+================================================================================
 
-2. Enlazar repo remoto y push (reemplaza la URL por la tuya)
-
-```powershell
-git remote add origin https://github.com/<usuario>/<repo>.git
-git push -u origin main
-```
-
-Buenas prácticas y recomendaciones:
-- No subas archivos con credenciales. Usa `.env` y agrega `.env` a `.gitignore`.
-- Añade `LICENSE` si quieres especificar la licencia.
-- Mantén la rama principal llamada `main` y crea ramas para features/bugfixes.
-- Considera usar `composer.json` si usas dependencias PHP.
-- Configura protección de ramas en GitHub y CI (GitHub Actions) para pruebas.
-
-Si quieres, puedo:
-- Inicializar el repo local y hacer el commit aquí.
-- Crear el repo remoto usando `gh` (si instalas y autorizas `gh`).
-- Guiarte paso a paso por la UI de GitHub o VS Code.
+Código: 5-15 caracteres, alfanumérico, único
+Nombre: 2-50 caracteres
+Precio: Número positivo, máximo 2 decimales
+Materiales: Mínimo 2 seleccionados
+Bodega, Sucursal, Moneda: Obligatorios
+Descripción: 10-1000 caracteres
