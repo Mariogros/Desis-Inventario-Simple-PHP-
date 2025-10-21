@@ -1,0 +1,27 @@
+/.vscode/
+.idea/
+node_modules/
+vendor/
+.env
+.env.local
+composer.lock
+/.sass-cache
+/.history/
+/.DS_Store
+Thumbs.db
+
+# PHPStorm
+/.idea/
+
+# Logs and databases
+/logs/
+/tmp/
+
+# Build outputs
+/dist/
+/build/
+
+# OS files
+.DS_Store
+ehthumbs.db
+Icon?
