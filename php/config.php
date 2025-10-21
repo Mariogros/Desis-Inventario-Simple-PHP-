@@ -1,9 +1,9 @@
 <?php
 define('DB_HOST', 'localhost');
-define('DB_PORT', '8001');
+define('DB_PORT', '5451');
 define('DB_NAME', 'registro_productos');
 define('DB_USER', 'postgres');
-define('DB_PASSWORD', 'Crayones1');
+define('DB_PASSWORD', 'YOURPASSWORD');
 
 function getConnection() {
     $connectionString = sprintf(

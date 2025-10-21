@@ -1,4 +1,4 @@
--- Script de creación de base de datos
+-- Script de creación de base de datos (incluye dummy data para testeo de sucursales/bodegas)
 -- PostgreSQL
 
 CREATE TABLE IF NOT EXISTS bodegas (
